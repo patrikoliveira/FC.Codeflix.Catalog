@@ -6,4 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Entity\" />
+    <None Remove="Exceptions\" />
+    <None Remove="SeedWork\" />
+    <None Remove="Validation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entity\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="SeedWork\" />
+    <Folder Include="Validation\" />
+  </ItemGroup>
 </Project>
