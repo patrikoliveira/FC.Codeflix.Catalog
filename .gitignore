@@ -401,3 +401,6 @@ FodyWeavers.xsd
 
 # MACOS
 .DS_Store
+
+#Relatorio de cobertura de testes
+coveragereport
