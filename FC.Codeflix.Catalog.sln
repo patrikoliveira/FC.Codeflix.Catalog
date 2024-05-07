@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC9E1FC9-441B-44BA-B97A-172CB2B9ECED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.Domain", "src\FC.Codeflix.Catalog.Domain\FC.Codeflix.Catalog.Domain.csproj", "{52F9FA49-B323-4BF8-B41F-30718E1DB307}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FAF243D6-16F5-4A5D-BA53-90D7516C5F42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.UnitTests", "tests\FC.Codeflix.Catalog.UnitTests\FC.Codeflix.Catalog.UnitTests.csproj", "{149AE4F1-D88A-4EA5-B14D-7BA31E08225E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52F9FA49-B323-4BF8-B41F-30718E1DB307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F9FA49-B323-4BF8-B41F-30718E1DB307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52F9FA49-B323-4BF8-B41F-30718E1DB307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52F9FA49-B323-4BF8-B41F-30718E1DB307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{149AE4F1-D88A-4EA5-B14D-7BA31E08225E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{149AE4F1-D88A-4EA5-B14D-7BA31E08225E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{149AE4F1-D88A-4EA5-B14D-7BA31E08225E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{149AE4F1-D88A-4EA5-B14D-7BA31E08225E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52F9FA49-B323-4BF8-B41F-30718E1DB307} = {BC9E1FC9-441B-44BA-B97A-172CB2B9ECED}
+		{149AE4F1-D88A-4EA5-B14D-7BA31E08225E} = {FAF243D6-16F5-4A5D-BA53-90D7516C5F42}
+	EndGlobalSection
+EndGlobal
