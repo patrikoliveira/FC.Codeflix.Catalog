@@ -11,11 +11,13 @@
     <None Remove="Exceptions\" />
     <None Remove="SeedWork\" />
     <None Remove="Validation\" />
+    <None Remove="Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
     <Folder Include="Exceptions\" />
     <Folder Include="SeedWork\" />
     <Folder Include="Validation\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
 </Project>

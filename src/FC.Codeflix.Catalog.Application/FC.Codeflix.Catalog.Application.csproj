@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Interfaces\" />
+    <None Remove="UseCases\" />
+    <None Remove="UseCases\Category\" />
+    <None Remove="UseCases\Category\CreateCategory\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="UseCases\" />
+    <Folder Include="UseCases\" />
+    <Folder Include="UseCases\Category\" />
+    <Folder Include="UseCases\Category\CreateCategory\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FC.Codeflix.Catalog.Domain\FC.Codeflix.Catalog.Domain.csproj" />
+  </ItemGroup>
+</Project>
