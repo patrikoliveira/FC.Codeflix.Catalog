@@ -46,6 +46,44 @@ public class CreateCategoryTestFixture : BaseFixture
             GetRandomBoolean()
         );
 
+    public CreateCategoryInput GetInvalidInputShortName()
+    {
+        var invalidInputShortName = GetInput();
+        invalidInputShortName.Name = invalidInputShortName.Name.Substring(0, 2);
+        return invalidInputShortName;
+    }
+
+    public CreateCategoryInput GetInvalidInputTooLongName()
+    {
+        var invalidInputLongName = GetInput();
+        var tooLongNameForCategory = Faker.Commerce.ProductName();
+        while (tooLongNameForCategory.Length <= 255)
+        {
+            tooLongNameForCategory = $"{tooLongNameForCategory} {Faker.Commerce.ProductName()}";
+        }
+        invalidInputLongName.Name = tooLongNameForCategory;
+        return invalidInputLongName;
+    }
+
+    public CreateCategoryInput GetInvalidInputCategoryNull()
+    {
+        var invalidInputDescriptionNull = GetInput();
+        invalidInputDescriptionNull.Description = null!;
+        return invalidInputDescriptionNull;
+    }
+
+    public CreateCategoryInput GetInvalidInputTooLongDescription()
+    {
+        var invalidInputLongDescription = GetInput();
+        var tooLongDescriptionForCategory = Faker.Commerce.ProductDescription();
+        while (tooLongDescriptionForCategory.Length <= 10_000)
+        {
+            tooLongDescriptionForCategory = $"{tooLongDescriptionForCategory} {Faker.Commerce.ProductDescription()}";
+        }
+        invalidInputLongDescription.Description = tooLongDescriptionForCategory;
+        return invalidInputLongDescription;
+    }
+
     public Mock<ICategoryRepository> GetRepositoryMock() => new();
     public Mock<IUnitOfWork> GetUnitOfWorkMock() => new();
 
