@@ -12,6 +12,7 @@
     <None Remove="UseCases\Category\" />
     <None Remove="UseCases\Category\CreateCategory\" />
     <None Remove="UseCases\Category\GetCategory\" />
+    <None Remove="UseCases\Category\Common\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -20,6 +21,7 @@
     <Folder Include="UseCases\Category\" />
     <Folder Include="UseCases\Category\CreateCategory\" />
     <Folder Include="UseCases\Category\GetCategory\" />
+    <Folder Include="UseCases\Category\Common\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FC.Codeflix.Catalog.Domain\FC.Codeflix.Catalog.Domain.csproj" />
