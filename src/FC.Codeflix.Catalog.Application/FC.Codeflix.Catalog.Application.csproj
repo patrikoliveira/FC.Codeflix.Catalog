@@ -30,5 +30,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="FluentValidation" Version="11.9.1" />
   </ItemGroup>
 </Project>
