@@ -34,6 +34,7 @@
     <Folder Include="Application\" />
     <Folder Include="Application\CreateCategory\" />
     <Folder Include="Application\GetCategory\" />
+    <Folder Include="Application\DeleteCategory\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\FC.Codeflix.Catalog.Domain\FC.Codeflix.Catalog.Domain.csproj" />
@@ -45,5 +46,6 @@
     <None Remove="Application\" />
     <None Remove="Application\CreateCategory\" />
     <None Remove="Application\GetCategory\" />
+    <None Remove="Application\DeleteCategory\" />
   </ItemGroup>
 </Project>
