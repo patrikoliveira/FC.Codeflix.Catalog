@@ -33,6 +33,7 @@
     <Folder Include="Domain\Entity\Validation\" />
     <Folder Include="Application\" />
     <Folder Include="Application\CreateCategory\" />
+    <Folder Include="Application\GetCategory\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\FC.Codeflix.Catalog.Domain\FC.Codeflix.Catalog.Domain.csproj" />
@@ -43,5 +44,6 @@
     <None Remove="Domain\Entity\Validation\" />
     <None Remove="Application\" />
     <None Remove="Application\CreateCategory\" />
+    <None Remove="Application\GetCategory\" />
   </ItemGroup>
 </Project>
