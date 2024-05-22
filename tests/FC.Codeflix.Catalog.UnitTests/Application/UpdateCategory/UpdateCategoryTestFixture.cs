@@ -38,7 +38,7 @@ public class UpdateCategoryTestFixture : BaseFixture
         return categoryDescription;
     }
 
-    public static bool GetRandomBoolean() => (new Random()).NextDouble() < 0.5;
+    public bool GetRandomBoolean() => (new Random()).NextDouble() < 0.5;
 
     public Category GetExampleCategory() => new(
         GetValidCategoryName(),
