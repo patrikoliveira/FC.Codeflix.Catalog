@@ -21,7 +21,7 @@ public class UpdateCategory : IUpdateCategory
         category.Update(request.Name, request.Description);
         if (request.IsActive != category.IsActive)
         {
-            if (request.IsActive)
+            if (request.IsActive.HasValue && request.IsActive.Value)
             {
                 category.Activate();
             }
