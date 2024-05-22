@@ -15,6 +15,7 @@
     <None Remove="UseCases\Category\Common\" />
     <None Remove="Exceptions\" />
     <None Remove="UseCases\Category\DeleteCategory\" />
+    <None Remove="UseCases\Category\UpdateCategory\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -26,6 +27,7 @@
     <Folder Include="UseCases\Category\Common\" />
     <Folder Include="Exceptions\" />
     <Folder Include="UseCases\Category\DeleteCategory\" />
+    <Folder Include="UseCases\Category\UpdateCategory\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FC.Codeflix.Catalog.Domain\FC.Codeflix.Catalog.Domain.csproj" />

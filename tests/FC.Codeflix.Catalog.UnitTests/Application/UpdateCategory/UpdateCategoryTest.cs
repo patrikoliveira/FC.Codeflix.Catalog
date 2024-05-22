@@ -23,7 +23,7 @@ public class UpdateCategoryTest
         repositoryMock.Setup(x => x.Get(exampleCategory.Id, It.IsAny<CancellationToken>()))
             .ReturnsAsync(exampleCategory);
 
-        var input = UseCase.UpdateCategoryInput(
+        var input = new UseCase.UpdateCategoryInput(
             exampleCategory.Id,
             _fixture.GetValidCategoryName(),
             _fixture.GetValidCategoryDescription(),
@@ -32,7 +32,7 @@ public class UpdateCategoryTest
 
         var useCase = new UseCase.UpdateCategory(repositoryMock.Object, unitOfWorkMock.Object);
 
-        CategoryModelOutput output = await useCase.Handle(input);
+        CategoryModelOutput output = await useCase.Handle(input, CancellationToken.None);
 
         output.Should().NotBeNull();
         output.Name.Should().Be(input.Name);
