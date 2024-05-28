@@ -12,6 +12,7 @@
     <None Remove="SeedWork\" />
     <None Remove="Validation\" />
     <None Remove="Repository\" />
+    <None Remove="SeedWork\SearchableRepository\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
@@ -19,5 +20,6 @@
     <Folder Include="SeedWork\" />
     <Folder Include="Validation\" />
     <Folder Include="Repository\" />
+    <Folder Include="SeedWork\SearchableRepository\" />
   </ItemGroup>
 </Project>
