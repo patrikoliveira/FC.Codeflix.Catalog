@@ -1,13 +1,13 @@
 ﻿using FC.Codeflix.Catalog.Application.Exceptions;
 using FC.Codeflix.Catalog.Application.UseCases.Category.Common;
 using FC.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
-using FC.Codeflix.Catalog.Domain.Entity;
+using Entity = FC.Codeflix.Catalog.Domain.Entity;
 using FC.Codeflix.Catalog.Domain.Exceptions;
 using FluentAssertions;
 using Moq;
 using UseCase = FC.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
 
-namespace FC.Codeflix.Catalog.UnitTests.Application.UpdateCategory;
+namespace FC.Codeflix.Catalog.UnitTests.Application.Category.UpdateCategory;
 
 [Collection(nameof(UpdateCategoryTestFixture))]
 public class UpdateCategoryTest
@@ -23,7 +23,7 @@ public class UpdateCategoryTest
         parameters: 10,
         MemberType = typeof(UpdateCategoryTestDataGenerator)
         )]
-    public async void UpdateCategory(Category exampleCategory, UseCase.UpdateCategoryInput input)
+    public async void UpdateCategory(Entity.Category exampleCategory, UseCase.UpdateCategoryInput input)
     {
         var repositoryMock = _fixture.GetRepositoryMock();
         var unitOfWorkMock = _fixture.GetUnitOfWorkMock();
@@ -52,7 +52,7 @@ public class UpdateCategoryTest
     parameters: 10,
     MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
-    public async void UpdateCategoryWithoutProvidingIsActive(Category exampleCategory, UseCase.UpdateCategoryInput exampleInput)
+    public async void UpdateCategoryWithoutProvidingIsActive(Entity.Category exampleCategory, UseCase.UpdateCategoryInput exampleInput)
     {
         var input = new UseCase.UpdateCategoryInput(
             exampleInput.Id,
@@ -87,7 +87,7 @@ public class UpdateCategoryTest
     parameters: 10,
     MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
-    public async void UpdateCategoryOnlyName(Category exampleCategory, UpdateCategoryInput exampleInput)
+    public async void UpdateCategoryOnlyName(Entity.Category exampleCategory, UpdateCategoryInput exampleInput)
     {
         var input = new UpdateCategoryInput(
             exampleInput.Id,
