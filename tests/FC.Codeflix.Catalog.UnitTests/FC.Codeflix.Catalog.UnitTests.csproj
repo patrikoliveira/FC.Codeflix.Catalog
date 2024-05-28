@@ -32,10 +32,13 @@
     <Folder Include="Common\" />
     <Folder Include="Domain\Entity\Validation\" />
     <Folder Include="Application\" />
-    <Folder Include="Application\CreateCategory\" />
-    <Folder Include="Application\GetCategory\" />
-    <Folder Include="Application\DeleteCategory\" />
-    <Folder Include="Application\UpdateCategory\" />
+    <Folder Include="Application\Category\" />
+    <Folder Include="Application\Category\Common\" />
+    <Folder Include="Application\Category\CreateCategory\" />
+    <Folder Include="Application\Category\DeleteCategory\" />
+    <Folder Include="Application\Category\GetCategory\" />
+    <Folder Include="Application\Category\ListCategories\" />
+    <Folder Include="Application\Category\UpdateCategory\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\FC.Codeflix.Catalog.Domain\FC.Codeflix.Catalog.Domain.csproj" />
@@ -45,9 +48,12 @@
     <None Remove="Common\" />
     <None Remove="Domain\Entity\Validation\" />
     <None Remove="Application\" />
-    <None Remove="Application\CreateCategory\" />
-    <None Remove="Application\GetCategory\" />
-    <None Remove="Application\DeleteCategory\" />
-    <None Remove="Application\UpdateCategory\" />
+    <None Remove="Application\Category\" />
+    <None Remove="Application\Category\Common\" />
+    <None Remove="Application\Category\CreateCategory\" />
+    <None Remove="Application\Category\DeleteCategory\" />
+    <None Remove="Application\Category\GetCategory\" />
+    <None Remove="Application\Category\ListCategories\" />
+    <None Remove="Application\Category\UpdateCategory\" />
   </ItemGroup>
 </Project>
