@@ -29,7 +29,6 @@ public class UpdateCategory : IUpdateCategory
             {
                 category.Deactivate();
             }
-
         }
 
         await _categoryRepository.Update(category, cancellationToken);
