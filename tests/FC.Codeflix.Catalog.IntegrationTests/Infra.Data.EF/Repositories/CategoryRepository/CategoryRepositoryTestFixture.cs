@@ -46,7 +46,7 @@ public class CategoryRepositoryTestFixture : BaseFixture
     public List<Category> GetExampleCategoriesList(int length = 10)
         => Enumerable.Range(1, length).Select(_ => GetExampleCategory()).ToList();
 
-    public static CodeflixCatalogDbContext CreateDbContext() =>
+    public CodeflixCatalogDbContext CreateDbContext() =>
         new(
             new DbContextOptionsBuilder<CodeflixCatalogDbContext>()
                 .UseInMemoryDatabase("integration-tests-db")
