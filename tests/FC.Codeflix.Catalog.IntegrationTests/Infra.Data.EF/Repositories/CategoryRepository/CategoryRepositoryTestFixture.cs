@@ -1,8 +1,6 @@
 ﻿using FC.Codeflix.Catalog.Domain.Entity;
 using FC.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
-using FC.Codeflix.Catalog.Infra.Data.EF;
 using FC.Codeflix.Catalog.IntegrationTests.Base;
-using Microsoft.EntityFrameworkCore;
 
 namespace FC.Codeflix.Catalog.IntegrationTests.Infra.Data.EF.Repositories.CategoryRepository;
 
@@ -54,7 +52,7 @@ public class CategoryRepositoryTestFixture : BaseFixture
         return category;
     }).ToList();
 
-    public List<Category> CloneCategoriesListOrdered(List<Category> categoriesList, string orderBy, SearchOrder order)
+    public List<Category> CloneCategoriesListOrdered(List<Category> categoriesList, string orderBy, SearchOrder order) 
     {
         var listClone = new List<Category>(categoriesList);
         IEnumerable<Category> orderedEnumerable = (orderBy.ToLower(), order) switch
@@ -70,20 +68,5 @@ public class CategoryRepositoryTestFixture : BaseFixture
 
         return orderedEnumerable.ToList();
     }
-
-    public CodeflixCatalogDbContext CreateDbContext(bool preserveData = false)
-    {
-        var context = new CodeflixCatalogDbContext(
-            new DbContextOptionsBuilder<CodeflixCatalogDbContext>()
-                .UseInMemoryDatabase("integration-tests-db")
-                .Options
-        );
-        if (!preserveData)
-        {
-            context.Database.EnsureDeleted();
-        }
-        return context;
-    }
-
 }
 

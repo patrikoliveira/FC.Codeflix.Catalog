@@ -30,10 +30,12 @@
 	  <None Remove="Infra.Data.EF\Repositories\" />
 	  <None Remove="Infra.Data.EF\Repositories\CategoryRepository\" />
 	  <None Remove="Base\" />
+	  <None Update="xunit.runner.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Infra.Data.EF\" />
-	  <Folder Include="Infra.Data.EF\Repositories\" />
 	  <Folder Include="Infra.Data.EF\Repositories\CategoryRepository\" />
 	  <Folder Include="Base\" />
 	</ItemGroup>
