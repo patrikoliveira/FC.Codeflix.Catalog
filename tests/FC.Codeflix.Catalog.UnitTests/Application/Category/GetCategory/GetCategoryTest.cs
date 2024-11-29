@@ -64,6 +64,5 @@ public class GetCategoryTest
                 It.IsAny<CancellationToken>()
             ), Times.Once);
     }
-
 }
 
