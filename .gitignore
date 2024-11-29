@@ -404,3 +404,5 @@ FodyWeavers.xsd
 
 #Relatorio de cobertura de testes
 coveragereport
+
+.idea

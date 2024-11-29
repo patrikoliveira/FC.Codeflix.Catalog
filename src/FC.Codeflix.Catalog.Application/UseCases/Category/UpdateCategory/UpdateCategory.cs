@@ -19,7 +19,7 @@ public class UpdateCategory : IUpdateCategory
     {
         var category = await _categoryRepository.Get(request.Id, cancellationToken);
         category.Update(request.Name, request.Description);
-        if (request.IsActive != category.IsActive)
+        if (request.IsActive is not null && request.IsActive != category.IsActive)
         {
             if (request.IsActive.HasValue && request.IsActive.Value)
             {
