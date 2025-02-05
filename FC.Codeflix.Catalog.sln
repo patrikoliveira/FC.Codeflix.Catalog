@@ -19,7 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.Infra.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.EndToEndTests", "tests\FC.Codeflix.Catalog.EndToEndTests\FC.Codeflix.Catalog.EndToEndTests.csproj", "{F89B5F4B-D03E-4C62-B343-C8275953F77E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.Api", "src \FC.Codeflix.Catalog.Api\FC.Codeflix.Catalog.Api.csproj", "{25EAEFD5-71E6-4DBD-8CCD-32EB48621B44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.Api", "src\FC.Codeflix.Catalog.Api\FC.Codeflix.Catalog.Api.csproj", "{25EAEFD5-71E6-4DBD-8CCD-32EB48621B44}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "env", "env", "{C3E0C09E-6E09-4083-9DAD-EBFAD931F894}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
