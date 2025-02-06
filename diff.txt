@@ -1,0 +1,197 @@
+diff --git a/FC.Codeflix.Catalog.sln b/FC.Codeflix.Catalog.sln
+index c9872d6..23319b7 100644
+--- a/FC.Codeflix.Catalog.sln
++++ b/FC.Codeflix.Catalog.sln
+@@ -22,6 +22,9 @@ EndProject
+ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.Api", "src\FC.Codeflix.Catalog.Api\FC.Codeflix.Catalog.Api.csproj", "{25EAEFD5-71E6-4DBD-8CCD-32EB48621B44}"
+ EndProject
+ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "env", "env", "{C3E0C09E-6E09-4083-9DAD-EBFAD931F894}"
++	ProjectSection(SolutionItems) = preProject
++		env\docker-compose.yml = env\docker-compose.yml
++	EndProjectSection
+ EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+diff --git a/src/FC.Codeflix.Catalog.Api/Configurations/ConnectionsConfiguration.cs b/src/FC.Codeflix.Catalog.Api/Configurations/ConnectionsConfiguration.cs
+index a1fc07b..712501f 100644
+--- a/src/FC.Codeflix.Catalog.Api/Configurations/ConnectionsConfiguration.cs
++++ b/src/FC.Codeflix.Catalog.Api/Configurations/ConnectionsConfiguration.cs
+@@ -5,16 +5,17 @@ namespace FC.Codeflix.Catalog.Api.Configurations;
+ 
+ public static class ConnectionsConfiguration
+ {
+-    public static IServiceCollection AddAppConnections(this IServiceCollection services)
++    public static IServiceCollection AddAppConnections(this IServiceCollection services, IConfiguration configuration)
+     {
+-        services.AddDbConnection();
++        services.AddDbConnection(configuration);
+         return services;
+     }
+-    
+-    private static IServiceCollection AddDbConnection(this IServiceCollection services)
++       
++    private static IServiceCollection AddDbConnection(this IServiceCollection services, IConfiguration configuration)
+     {
++        var connectionString = configuration.GetConnectionString("CatalogDb");
+         services.AddDbContext<CodeflixCatalogDbContext>(
+-            options => options.UseInMemoryDatabase("InMemory-DSV-DataBase"));
++            options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+  
+         return services;
+     }
+diff --git a/src/FC.Codeflix.Catalog.Api/FC.Codeflix.Catalog.Api.csproj b/src/FC.Codeflix.Catalog.Api/FC.Codeflix.Catalog.Api.csproj
+index 8e83c00..cf74344 100644
+--- a/src/FC.Codeflix.Catalog.Api/FC.Codeflix.Catalog.Api.csproj
++++ b/src/FC.Codeflix.Catalog.Api/FC.Codeflix.Catalog.Api.csproj
+@@ -10,6 +10,7 @@
+     <ItemGroup>
+         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
++        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.3" />
+         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.31" />
+     </ItemGroup>
+diff --git a/src/FC.Codeflix.Catalog.Api/Program.cs b/src/FC.Codeflix.Catalog.Api/Program.cs
+index 93a829d..f00bd84 100644
+--- a/src/FC.Codeflix.Catalog.Api/Program.cs
++++ b/src/FC.Codeflix.Catalog.Api/Program.cs
+@@ -3,7 +3,7 @@ using FC.Codeflix.Catalog.Api.Configurations;
+ var builder = WebApplication.CreateBuilder(args);
+ 
+ builder.Services
+-    .AddAppConnections()
++    .AddAppConnections(builder.Configuration)
+     .AddUseCases()
+     .AddAndConfigureControllers();
+ 
+diff --git a/src/FC.Codeflix.Catalog.Api/appsettings.Development.json b/src/FC.Codeflix.Catalog.Api/appsettings.Development.json
+index 0c208ae..2e88739 100644
+--- a/src/FC.Codeflix.Catalog.Api/appsettings.Development.json
++++ b/src/FC.Codeflix.Catalog.Api/appsettings.Development.json
+@@ -4,5 +4,8 @@
+       "Default": "Information",
+       "Microsoft.AspNetCore": "Warning"
+     }
++  },
++  "ConnectionStrings": {
++    "CatalogDb": "Server=localhost;Port=3306;Database=catalog;Uid=root;Pwd=C0Dfl1X.@;"
+   }
+ }
+diff --git a/src/FC.Codeflix.Catalog.Api/appsettings.EndToEndTest.json b/src/FC.Codeflix.Catalog.Api/appsettings.EndToEndTest.json
+index 0c208ae..11280f2 100644
+--- a/src/FC.Codeflix.Catalog.Api/appsettings.EndToEndTest.json
++++ b/src/FC.Codeflix.Catalog.Api/appsettings.EndToEndTest.json
+@@ -4,5 +4,8 @@
+       "Default": "Information",
+       "Microsoft.AspNetCore": "Warning"
+     }
++  },
++  "ConnectionStrings": {
++    "CatalogDb": "Server=localhost;Port=33060;Database=catalog_e2e;Uid=root;Pwd=C0Dfl1X.@;"
+   }
+ }
+diff --git a/tests/FC.Codeflix.Catalog.EndToEndTests/Base/BaseFixture.cs b/tests/FC.Codeflix.Catalog.EndToEndTests/Base/BaseFixture.cs
+index f5ae2c7..582b87b 100644
+--- a/tests/FC.Codeflix.Catalog.EndToEndTests/Base/BaseFixture.cs
++++ b/tests/FC.Codeflix.Catalog.EndToEndTests/Base/BaseFixture.cs
+@@ -1,6 +1,7 @@
+ using Bogus;
+ using FC.Codeflix.Catalog.Infra.Data.EF;
+ using Microsoft.EntityFrameworkCore;
++using Microsoft.Extensions.Configuration;
+ 
+ namespace FC.Codeflix.Catalog.EndToEndTests.Base;
+ 
+@@ -11,19 +12,27 @@ public class BaseFixture
+     public HttpClient HttpClient { get; set; }
+     public CustomWebApplicationFactory<Program> WebappFactory { get; set; }
+ 
+-    public BaseFixture()
++    private readonly string _dbConnectionString;
++
++    protected BaseFixture()
+     {
+         Faker = new Faker("pt_BR");
+         WebappFactory = new CustomWebApplicationFactory<Program>();
+         HttpClient = WebappFactory.CreateClient();
+         ApiClient = new ApiClient(HttpClient);
++        var configuration = WebappFactory.Services.GetService(typeof(IConfiguration));
++        
++        if (configuration is null)
++            ArgumentNullException.ThrowIfNull(configuration);
++        
++        _dbConnectionString = ((IConfiguration)configuration).GetConnectionString("CatalogDB");
+     }
+-    
+-    public CodeflixCatalogDbContext CreateDbContext(bool preserveData = false)
++
++    protected CodeflixCatalogDbContext CreateDbContext(bool preserveData = false)
+     {
+         var context = new CodeflixCatalogDbContext(
+             new DbContextOptionsBuilder<CodeflixCatalogDbContext>()
+-                .UseInMemoryDatabase($"end2end-tests-db")
++                .UseMySql(_dbConnectionString, ServerVersion.AutoDetect(_dbConnectionString))
+                 .Options
+         );
+         return context;
+diff --git a/tests/FC.Codeflix.Catalog.EndToEndTests/Base/CustomWebApplicationFactory.cs b/tests/FC.Codeflix.Catalog.EndToEndTests/Base/CustomWebApplicationFactory.cs
+index faf9e9e..9f80cd6 100644
+--- a/tests/FC.Codeflix.Catalog.EndToEndTests/Base/CustomWebApplicationFactory.cs
++++ b/tests/FC.Codeflix.Catalog.EndToEndTests/Base/CustomWebApplicationFactory.cs
+@@ -11,18 +11,17 @@ public class CustomWebApplicationFactory<TStartup>
+ {
+     protected override void ConfigureWebHost(IWebHostBuilder builder)
+     {
++        builder.UseEnvironment("EndToEndTest");
+         builder.ConfigureServices(services =>
+         {
+-            var dbOptions = services.FirstOrDefault(x => x.ServiceType == typeof(DbContextOptions<CodeflixCatalogDbContext>));
+-            if (dbOptions is not null)
+-            {
+-                services.Remove(dbOptions);
+-            }
+-
+-            services.AddDbContext<CodeflixCatalogDbContext>(options =>
+-            {
+-                options.UseInMemoryDatabase("end2end-tests-db");
+-            });
++            var serviceProvider = services.BuildServiceProvider();
++            using var scope = serviceProvider.CreateScope();
++            
++            var context = scope.ServiceProvider.GetService<CodeflixCatalogDbContext>();
++            ArgumentNullException.ThrowIfNull(context);
++                
++            context.Database.EnsureDeleted();  
++            context.Database.EnsureCreated();
+         });
+ 
+         base.ConfigureWebHost(builder);
+diff --git a/tests/FC.Codeflix.Catalog.EndToEndTests/FC.Codeflix.Catalog.EndToEndTests.csproj b/tests/FC.Codeflix.Catalog.EndToEndTests/FC.Codeflix.Catalog.EndToEndTests.csproj
+index c2f0206..6b63336 100644
+--- a/tests/FC.Codeflix.Catalog.EndToEndTests/FC.Codeflix.Catalog.EndToEndTests.csproj
++++ b/tests/FC.Codeflix.Catalog.EndToEndTests/FC.Codeflix.Catalog.EndToEndTests.csproj
+@@ -14,6 +14,7 @@
+         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.36" />
+         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.31" />
+         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0"/>
++        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.3" />
+         <PackageReference Include="xunit" Version="2.4.1"/>
+         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+diff --git a/tests/FC.Codeflix.Catalog.EndToEndTests/docker-compose.yml b/tests/FC.Codeflix.Catalog.EndToEndTests/docker-compose.yml
+index e69de29..989ab33 100644
+--- a/tests/FC.Codeflix.Catalog.EndToEndTests/docker-compose.yml
++++ b/tests/FC.Codeflix.Catalog.EndToEndTests/docker-compose.yml
+@@ -0,0 +1,11 @@
++version: '3.4'
++
++services:
++  fc.codeflix.catalog.fb:
++    container_name: catalogdb-e2e
++    hostname: catalogdb-e2e
++    image: mysql
++    ports:
++      - 33060:3306
++    environment:
++      MYSQL_ROOT_PASSWORD: C0Dfl1X.@
+\ No newline at end of file
