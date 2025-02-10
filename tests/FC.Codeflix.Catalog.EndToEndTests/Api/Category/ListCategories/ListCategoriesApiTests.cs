@@ -1,6 +1,7 @@
 using System.Net;
 using FC.Codeflix.Catalog.Application.UseCases.Category.ListCategories;
 using FC.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
+using FC.Codeflix.Catalog.EndToEndTests.Extensions.DateTime;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 
@@ -39,7 +40,7 @@ public class ListCategoriesApiTests : IDisposable
             outputItem.Name.Should().Be(exampleItem!.Name);
             outputItem.Description.Should().Be(exampleItem.Description);
             outputItem.IsActive.Should().Be(exampleItem.IsActive);
-            outputItem.CreatedAt.Should().Be(exampleItem.CreatedAt);
+            outputItem.CreatedAt.TrimMilliseconds().Should().Be(exampleItem.CreatedAt.TrimMilliseconds());
         }
     }
     
@@ -83,7 +84,7 @@ public class ListCategoriesApiTests : IDisposable
             outputItem.Name.Should().Be(exampleItem!.Name);
             outputItem.Description.Should().Be(exampleItem.Description);
             outputItem.IsActive.Should().Be(exampleItem.IsActive);
-            outputItem.CreatedAt.Should().Be(exampleItem.CreatedAt);
+            outputItem.CreatedAt.TrimMilliseconds().Should().Be(exampleItem.CreatedAt.TrimMilliseconds());
         }
     }
     
@@ -123,7 +124,7 @@ public class ListCategoriesApiTests : IDisposable
             outputItem.Name.Should().Be(exampleItem!.Name);
             outputItem.Description.Should().Be(exampleItem.Description);
             outputItem.IsActive.Should().Be(exampleItem.IsActive);
-            outputItem.CreatedAt.Should().Be(exampleItem.CreatedAt);
+            outputItem.CreatedAt.TrimMilliseconds().Should().Be(exampleItem.CreatedAt.TrimMilliseconds());
         }
     }
     
@@ -180,7 +181,7 @@ public class ListCategoriesApiTests : IDisposable
             outputItem.Name.Should().Be(exampleItem!.Name);
             outputItem.Description.Should().Be(exampleItem.Description);
             outputItem.IsActive.Should().Be(exampleItem.IsActive);
-            outputItem.CreatedAt.Should().Be(exampleItem.CreatedAt);
+            outputItem.CreatedAt.TrimMilliseconds().Should().Be(exampleItem.CreatedAt.TrimMilliseconds());
         }
     }
     
@@ -227,7 +228,7 @@ public class ListCategoriesApiTests : IDisposable
             outputItem!.Name.Should().Be(exampleItem!.Name);
             outputItem.Description.Should().Be(exampleItem.Description);
             outputItem.IsActive.Should().Be(exampleItem.IsActive);
-            outputItem.CreatedAt.Should().Be(exampleItem.CreatedAt);
+            outputItem.CreatedAt.TrimMilliseconds().Should().Be(exampleItem.CreatedAt.TrimMilliseconds());
         }
     }
     
