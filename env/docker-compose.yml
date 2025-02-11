@@ -9,3 +9,10 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: C0Dfl1X.@
+    networks:
+      - service_catalog
+
+networks:
+  service_catalog:
+    name: service_catalog
+    driver: bridge
