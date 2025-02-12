@@ -1,4 +1,5 @@
 using System.Net;
+using FC.Codeflix.Catalog.Api.ApiModels.Response;
 using FC.Codeflix.Catalog.Application.UseCases.Category.Common;
 using FC.Codeflix.Catalog.EndToEndTests.Extensions.DateTime;
 using FluentAssertions;
@@ -23,16 +24,16 @@ public class GetCategoryApiTests : IDisposable
         
         var exampleCategory = exampleCategoriesList[10];
 
-        var (response, output) = await _fixture.ApiClient.Get<CategoryModelOutput>($"/api/categories/{exampleCategory.Id}");
+        var (response, output) = await _fixture.ApiClient.Get<ApiResponse<CategoryModelOutput>>($"/api/categories/{exampleCategory.Id}");
         
         response.Should().NotBeNull();
         response!.StatusCode.Should().Be((HttpStatusCode)StatusCodes.Status200OK);
-        output.Should().NotBeNull();
-        output!.Id.Should().Be(exampleCategory.Id);
-        output.Name.Should().Be(exampleCategory.Name);
-        output.Description.Should().Be(exampleCategory.Description);
-        output.IsActive.Should().Be(exampleCategory.IsActive);
-        output.CreatedAt.TrimMilliseconds().Should().Be(exampleCategory.CreatedAt.TrimMilliseconds());
+        output!.Data.Should().NotBeNull();
+        output.Data.Id.Should().Be(exampleCategory.Id);
+        output.Data.Name.Should().Be(exampleCategory.Name);
+        output.Data.Description.Should().Be(exampleCategory.Description);
+        output.Data.IsActive.Should().Be(exampleCategory.IsActive);
+        output.Data.CreatedAt.TrimMilliseconds().Should().Be(exampleCategory.CreatedAt.TrimMilliseconds());
     }
     
     [Fact(DisplayName = nameof(ErrorWhenNotFound))]
