@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="Domain\" />
-    <Folder Include="Domain\Entity\" />
     <Folder Include="Domain\Entity\Category\" />
     <Folder Include="Common\" />
     <Folder Include="Domain\Entity\Validation\" />

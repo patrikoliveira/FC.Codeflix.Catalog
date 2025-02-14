@@ -15,7 +15,6 @@
     <None Remove="SeedWork\SearchableRepository\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entity\" />
     <Folder Include="Exceptions\" />
     <Folder Include="SeedWork\" />
     <Folder Include="Validation\" />
