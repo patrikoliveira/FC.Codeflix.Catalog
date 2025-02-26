@@ -64,5 +64,18 @@ public class CategoryRepository : ICategoryRepository
             _ => query.OrderBy(x => x.Name)
                 .ThenBy(x => x.Id)
         };
+
+    public async Task<IReadOnlyList<Guid>> GetIdsListByIds(
+        List<Guid> ids, 
+        CancellationToken cancellationToken
+    ) 
+        => await _categories.AsNoTracking()
+            .Where(category => ids.Contains(category.Id))
+            .Select(category => category.Id).ToListAsync(cancellationToken);
+
+    public async Task<IReadOnlyList<Category>> GetListByIds(List<Guid> ids, CancellationToken cancellationToken)
+        => await _categories.AsNoTracking()
+            .Where(category => ids.Contains(category.Id))
+            .ToListAsync(cancellationToken);
 }
 

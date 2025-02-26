@@ -22,12 +22,10 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="UseCases\" />
-    <Folder Include="UseCases\" />
     <Folder Include="UseCases\Category\" />
     <Folder Include="UseCases\Category\CreateCategory\" />
     <Folder Include="UseCases\Category\GetCategory\" />
     <Folder Include="UseCases\Category\Common\" />
-    <Folder Include="Exceptions\" />
     <Folder Include="UseCases\Category\DeleteCategory\" />
     <Folder Include="UseCases\Category\UpdateCategory\" />
     <Folder Include="Common\" />

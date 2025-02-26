@@ -30,7 +30,6 @@
     <Folder Include="Domain\Entity\Category\" />
     <Folder Include="Common\" />
     <Folder Include="Domain\Entity\Validation\" />
-    <Folder Include="Application\" />
     <Folder Include="Application\Category\" />
     <Folder Include="Application\Category\Common\" />
     <Folder Include="Application\Category\CreateCategory\" />
